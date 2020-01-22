@@ -17,8 +17,10 @@ class Patient:
         print("Patient name: <",self.name,">, weight=",self.weight,"kg, height=",self.height,"cm")
 
     def TemodarDose(self,firstDose):
-        
-
+        if firstDose in set(["y","Y"]):
+            return 150*self.BSA
+        else:
+            return 200*self.BSA
 
 def Main():
     print("My name is _______________ and my student number is _____________")
@@ -26,9 +28,11 @@ def Main():
     body_weight=input("Input body weight (kg): ")
     body_height=input("Input body height (cm): ")
     first_dose=input("Is this the first dose (Y/N): ")
-
     p=Patient("Alice",body_weight,body_height)
+    temodar_dose=p.TemodarDose(first_dose)
+
     p.Print()
+    print("Temodar dose for patient ",p.name,"is",temodar_dose,"mg")
     print(".")
     
  

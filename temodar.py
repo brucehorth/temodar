@@ -30,6 +30,8 @@ def DoseCovered(pCounts):
     return pCounts[0]*250+pCounts[1]*100+pCounts[2]*20+pCounts[3]*5
 
 def Main():
+    print("My name is _______________ and my student number is _____________")
+
     body_weight=input("Input body weight (kg): ")
     body_height=input("Input body height (cm): ")
     first_dose=input("Is this the first dose (Y/N): ")
