@@ -64,16 +64,12 @@ def Main():
     first_dose=input("Is this the first dose (Y/N): ")
     p=Patient("Alice",body_weight,body_height)
     temodar_dose=p.TemodarDose(first_dose)
-
-    p.Print()
+    p.Print()   
     print("Temodar dose for patient ",p.name,"is",temodar_dose,"mg")
-    
     t=Temodar()
     t.Print()
-
     pill_count=t.Dispense(p,first_dose)
     print("Temodar Unit Counts:", pill_count[0], " of 250mg, ",pill_count[1], " of 100mg, ", pill_count[2]," of 20mg, ", pill_count[3], " of 5mg" )
-
     print("Temodar dose covered: ",t.DoseCovered(pill_count),"mg/day")
     print("Temodar dose error: ",t.DoseError(temodar_dose,pill_count),"mg/day")
 
