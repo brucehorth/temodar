@@ -24,8 +24,8 @@ class Temodar(Drug):
         dose_covered=dose_covered+5*count5
         return [count250,count100,count20,count5]
 
-    def DoseCovered(self,pCounts):
-        return pCounts[0]*250+pCounts[1]*100+pCounts[2]*20+pCounts[3]*5
+    def DoseCovered(self,counts):
+        return counts[0]*250+counts[1]*100+counts[2]*20+counts[3]*5
 
     def DoseError(self,dose,counts):
         return self.DoseCovered(counts)-dose
@@ -48,7 +48,7 @@ class Patient:
         +math.log(71.84))/10000
     
     def Print(self):
-        print("Patient name: <",self.name,">, weight=",self.weight,"kg, height=",self.height,"cm")
+        print("Patient name: <",self.name,">, weight={0}kg, height={1}cm, BSA={2}sq meter.".format(self.weight,self.height,self.BSA))
 
     def TemodarDose(self,firstDose):
         if firstDose in set(["y","Y"]):
@@ -67,9 +67,9 @@ def Main():
     print("Temodar dose for patient ",p.name,"is",temodar_dose,"mg")
     t=Temodar()
     t.Print()
-    pill_count=t.Dispense(p,first_dose)
-    print("Temodar Unit Counts:", pill_count[0], " of 250mg, ",pill_count[1], " of 100mg, ", pill_count[2]," of 20mg, ", pill_count[3], " of 5mg" )
-    print("Temodar dose covered: ",t.DoseCovered(pill_count),"mg/day")
-    print("Temodar dose error: ",t.DoseError(temodar_dose,pill_count),"mg/day")
+    temodar_unit_counts=t.Dispense(p,first_dose)
+    print("Temodar Unit Counts:", temodar_unit_counts[0], " of 250mg, ",temodar_unit_counts[1], " of 100mg, ", temodar_unit_counts[2]," of 20mg, ", temodar_unit_counts[3], " of 5mg" )
+    print("Temodar dose covered: ",t.DoseCovered(temodar_unit_counts),"mg/day")
+    print("Temodar dose error: ",t.DoseError(temodar_dose,temodar_unit_counts),"mg/day")
 
 Main()
