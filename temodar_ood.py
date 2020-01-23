@@ -1,5 +1,39 @@
 import math
 
+class Drug:
+    def __init__(self, name="generic", strengths=[5]):
+        self.name=name
+        self.strengths=strengths
+
+    def Print(self):
+        print("Drug name: <",self.name,">, unit strengths:", self.strengths)
+
+class Temodar(Drug):
+    def __init__(self):
+        super().__init__("temodar",[250,100,20,5])
+    
+    def UnitCounts(self,dose):
+        dose_covered=0
+        count250=(dose-dose_covered) // 250
+        dose_covered=dose_covered+250*count250
+        count100=(dose-dose_covered) // 100
+        dose_covered=dose_covered+100*count100
+        count20=(dose-dose_covered) // 20
+        dose_covered=dose_covered+20*count20
+        count5=(dose-dose_covered) // 5
+        dose_covered=dose_covered+5*count5
+        return [count250,count100,count20,count5]
+
+    def DoseCovered(self,pCounts):
+        return pCounts[0]*250+pCounts[1]*100+pCounts[2]*20+pCounts[3]*5
+
+    def DoseError(self,dose,counts):
+        return self.DoseCovered(counts)-dose
+
+    def Dispense(self,patient,first_dose):
+        dose=patient.TemodarDose(first_dose)
+        return self.UnitCounts(dose)
+
 class Patient:
     def __init__(self, n="anonymous", w=0, h=0):
         self.name=n
@@ -33,7 +67,14 @@ def Main():
 
     p.Print()
     print("Temodar dose for patient ",p.name,"is",temodar_dose,"mg")
-    print(".")
     
- 
+    t=Temodar()
+    t.Print()
+
+    pill_count=t.Dispense(p,first_dose)
+    print("Temodar Unit Counts:", pill_count[0], " of 250mg, ",pill_count[1], " of 100mg, ", pill_count[2]," of 20mg, ", pill_count[3], " of 5mg" )
+
+    print("Temodar dose covered: ",t.DoseCovered(pill_count),"mg/day")
+    print("Temodar dose error: ",t.DoseError(temodar_dose,pill_count),"mg/day")
+
 Main()
