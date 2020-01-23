@@ -58,7 +58,6 @@ class Patient:
 
 def Main():
     print("My name is _______________ and my student number is _____________")
-
     body_weight=input("Input body weight (kg): ")
     body_height=input("Input body height (cm): ")
     first_dose=input("Is this the first dose (Y/N): ")
